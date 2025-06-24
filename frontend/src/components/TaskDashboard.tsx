@@ -1,20 +1,21 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useUser } from '@clerk/nextjs';
-import { Loader2 } from 'lucide-react';
-import { AuthGuard } from './AuthGuard';
-import { StatsCards } from './StatsCards';
-import { AITaskGenerator } from './AITaskGenerator';
-import { TaskForm } from './TaskForm';
-import { TaskList } from './TaskList';
-import { TaskEditDialog } from './TaskEditDialog';
-import { useTasks } from '@/hooks/useTasks';
-import { Task, FilterType } from '../../types/task';
+import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
+import { Loader2 } from "lucide-react";
+import { AuthGuard } from "./AuthGuard";
+import { StatsCards } from "./StatsCards";
+import { AITaskGenerator } from "./AITaskGenerator";
+import { TaskForm } from "./TaskForm";
+import { TaskList } from "./TaskList";
+import { TaskEditDialog } from "./TaskEditDialog";
+import { useTasks } from "@/hooks/useTasks";
+import { Task, FilterType } from "../../types/task";
+import { UserButton } from "@clerk/nextjs";
 
 export default function TaskDashboard() {
   const { user, isLoaded, isSignedIn } = useUser();
-  const [filter, setFilter] = useState<FilterType>('all');
+  const [filter, setFilter] = useState<FilterType>("all");
   const [editingTask, setEditingTask] = useState<Task | null>(null);
 
   const {
@@ -24,7 +25,7 @@ export default function TaskDashboard() {
     createTask,
     updateTask,
     deleteTask,
-    saveGeneratedTask
+    saveGeneratedTask,
   } = useTasks(filter);
 
   const handleToggleComplete = async (task: Task) => {
@@ -53,13 +54,22 @@ export default function TaskDashboard() {
       ) : (
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
           {/* Header */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <div>
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900">Task Manager</h1>
-              <p className="text-sm text-muted-foreground mt-1">
-                Welcome back, <span className="font-medium text-primary">{user?.firstName}</span>!
-              </p>
-            </div>
+          <div className="flex sm:flex-row justify-between items-start sm:items-center gap-4 mx-5">
+              <div className="flex flex-col">
+                <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+                  AI Task Manager
+                </h1>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Welcome back,{" "}
+                  <span className="font-medium text-primary">
+                    {user?.firstName}
+                  </span>
+                  !
+                </p>
+              </div>
+              <div>
+                <UserButton />
+              </div>
           </div>
 
           {/* Stats */}

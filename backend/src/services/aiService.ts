@@ -11,8 +11,8 @@ export class AIService {
     const prompt = `Generate a list of 5 concise, actionable tasks to learn about ${topic}. Return only the tasks, no numbering or formatting.`;
     
     const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = await response.text();
+    const response =  result.response;
+    const text =  response.text();
     
     // Parse the response into individual tasks
     const taskList = text.split('\n').filter(task => task.trim().length > 0).slice(0, 5);
