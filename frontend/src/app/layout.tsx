@@ -1,5 +1,10 @@
 import { ClerkProvider } from "@clerk/nextjs";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Ai Task Manager",
+  description: "AI Task Manager helps you generate and manage tasks using AI, making productivity smarter and easier.",
+};
 export default function RootLayout({
   children,
 }: {
@@ -8,13 +13,7 @@ export default function RootLayout({
   return (
     <ClerkProvider
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY!}
-      // Optional: Add appearance customization
-      appearance={{
-        baseTheme: 'light', // or 'dark'
-        variables: {
-          colorPrimary: '#000000',
-        },
-      }}
+
     >
       <html lang="en">
         <body>
