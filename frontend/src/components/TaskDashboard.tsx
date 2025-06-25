@@ -14,7 +14,7 @@ import { Task, FilterType } from "../../types/task";
 import { UserButton } from "@clerk/nextjs";
 
 export default function TaskDashboard() {
-  const { user, isLoaded, isSignedIn } = useUser();
+  const { user, isLoaded } = useUser();
   const [filter, setFilter] = useState<FilterType>("all");
   const [editingTask, setEditingTask] = useState<Task | null>(null);
 
